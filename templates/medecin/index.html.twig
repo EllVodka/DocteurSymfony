@@ -21,23 +21,23 @@
 	</style>
 
 	<div class="example-wrapper">
-		<h1>Voici la liste des docteurs ✅</h1>
+		<h1>Voici la liste des medecins ✅</h1>
 
 		<ul>
-			{% for docteur in docteurs %}
+			{% for medecin in medecins %}
 
 				<li>
-					{{docteur.id}}
+					{{medecin.id}}
 					-
-					{{docteur.nom}}
+					{{medecin.nom}}
 					-
-					{{docteur.description}}
+					{{medecin.description}}
 					-
-					{{docteur.ville}}
+					{{medecin.ville}}
 					-
-					{{docteur.telephone}}
+					{{medecin.telephone}}
 					-
-					<a href="{{ path('medecin_view',{'id':docteur.id}) }}">voir la fiche</a>
+					<a href="{{ path('medecin_view',{'id':medecin.id}) }}">voir la fiche</a>
 				</li>
 			{% endfor %}
 		</ul>

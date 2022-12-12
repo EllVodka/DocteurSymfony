@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeConsultation index{% endblock %}
+
+{% block body %}
+
+
+    <h1>TypeConsultation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Durée</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_consultation in type_consultations %}
+            <tr>
+                <td>{{ type_consultation.id }}</td>
+                <td>{{ type_consultation.libelle }}</td>
+                <td>{{ type_consultation.duree }}</td>
+                <td>
+                    <a href="{{ path('app_type_consultation_show', {'id': type_consultation.id}) }}">show</a>
+                    <a href="{{ path('app_type_consultation_edit', {'id': type_consultation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune données trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_consultation_new') }}">Créer type de con</a>
+{% endblock %}

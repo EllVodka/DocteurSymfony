@@ -64,6 +64,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->rDVs = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return strtoupper($this->nom).' '.ucfirst($this->prenom);
+    }
+
     public function getId(): ?int
     {
         return $this->id;

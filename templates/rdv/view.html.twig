@@ -18,18 +18,13 @@
 	</style>
 
 	<div class="example-wrapper">
-		<h1>Medecin id :
-			{{  medecin.id }}!
+		<h1>Type de consultation :
+			{{  rdv.typeConsultation.libelle }}!
 		</h1>
 
-		<h2>Bienvenue dans le cabinet de
-			{{medecin.nom}}</h2>
-		<p>{{medecin.description}}</p>
-		<p>Vien a
-			{{medecin.ville }}
-			on est bien y'a des pommes wola elles sont bonne çaaaaaaaaaaa mère</p>
-		<p>Tel :
-			{{medecin.telephone }}</p>
+		<h2>Vous serez pris en charge par
+			{{ rdv.medecin.nom }}</h2>
+		<p>A ce creneau horaire {{ rdv.creneau | date("Y/d/m h:m") }}, pendant {{ rdv.typeConsultation.duree }} minute.</p>
 
 	</div>
 
