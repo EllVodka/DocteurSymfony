@@ -33,6 +33,17 @@ class RDVController extends AbstractController
     }
 
     /**
+     * @Route("/view-all", name="app_rdv_view_all")
+     * @IsGranted("ROLE_USER")
+     */
+    public function viewAll(RDVRepository $rdvRepository): Response
+    {
+        return $this->render('rdv/viewall.html.twig', [
+            'rdvRepository' => $rdvRepository->findBy(['user'=>$this->getUser()]),
+        ]);
+    }
+
+    /**
      * @Route("/{id<\d+>}", name="app_rdv_view")
      */
     public function view(int $id, RDVRepository $rdvRepository): Response

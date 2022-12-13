@@ -4,69 +4,102 @@
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-		li {
-			text-decoration: none;
-		}
-		.encadrer {
-			border: thin solid black;
-			border-radius: 20px;
-			padding: 20px;
-			margin: 30px;
-			display: flex;
-			flex-direction: column;
-		}
-		.error {
-			color: red;
-			border-color: red;
+	<style>:root
+	{
+		--background-gradient: linear-gradient(30deg, #f39c12 30%, #f1c40f);
+		--gray: #34495e;
+		--darkgray: #2c3e50;
+	}
+	.example-wrapper {
+		margin: 1em auto;
+		max-width: 800px;
+		width: 95%;
+		font: 18px / 1.5 sans-serif;
+	}
+	.example-wrapper code {
+		background: #F5F5F5;
+		padding: 2px 6px;
+	}
+	li {
+		text-decoration: none;
+	}
+	.encadrer {
+		border: thin solid black;
+		border-radius: 20px;
+		padding: 20px;
+		margin: 30px;
+		display: flex;
+		flex-direction: column;
+	}
+	.error {
+		color: red;
+		border-color: red;
 
-		}
-		input {
-			border-radius: 10px;
-			padding: 5px;
-			width: 50%
-		}
-		button {
-			padding: 10px;
-			background-color: blue;
-			border-radius: 10px;
-			color: white;
-			border: none;
-			float: right;
-		}
-		button:after {
-			content: " 🚽";
-		}
-		.error li {
-			list-style: "❌ ";
-		}
-	</style>
+	}
+	input {
+		border-radius: 10px;
+		padding: 5px;
+		width: 50%
+	}
+	button {
+		padding: 10px;
+		background-color: blue;
+		border-radius: 10px;
+		color: white;
+		border: none;
+		float: right;
+	}
+	button:after {
+		content: " 🚽";
+	}
+	.error li {
+		list-style: "❌ ";
+	}
+	select {
+		/* Reset Select */
+		appearance: none;
+		outline: 0;
+		border: 0;
+		box-shadow: none;
+		/* Personalize */
+		padding: 0.2em 1em;
+		margin: 0.3em 0.3em 0.3em 0;
+		color: #fff;
+		background-color: var(--darkgray);
+		background-image: none;
+		cursor: pointer;
+		border-radius: 0.25em;
+		overflow: hidden;
 
-	<div class="example-wrapper">
-		{{ form_start(form) }}
-		<div class="encadrer">
-			{{ form_label(form.medecin) }}
-			<span class="error">{{ form_errors(form.medecin) }}</span>
-			{{ form_widget(form.medecin) }}
-		</div>
-		<div class="encadrer">
-			{{ form_label(form.creneau) }}
-			<span class="error">{{ form_errors(form.creneau) }}</span>
-			{{ form_widget(form.creneau) }}
-		</div>
+	}
+	#rdv_form_creneau {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:center;
+	}
+	#rdv_form_creneau_date > select {
+		width: 10vw;
+	}
+	#rdv_form_creneau_time > select {
+		width: 10vw;
+	}
+</style>
 
-		<span class="ajout">{{ form_widget(form.Ajouter) }}</span>
-		{{ form_end(form) }}
-
+<div class="example-wrapper">
+	{{ form_start(form) }}
+	<div class="encadrer">
+		{{ form_label(form.medecin) }}
+		<span class="error">{{ form_errors(form.medecin) }}</span>
+		{{ form_widget(form.medecin) }}
 	</div>
-{% endblock %}
+	<div class="encadrer">
+		{{ form_label(form.creneau) }}
+		<span class="error">{{ form_errors(form.creneau) }}</span>
+		<span class="horaire">{{form_widget(form.creneau)}}</span>
+
+		<span class="ajout">{{form_widget(form.Ajouter)}}</span>
+	</div>
+
+	{{ form_end(form) }}
+
+</div>{% endblock %}

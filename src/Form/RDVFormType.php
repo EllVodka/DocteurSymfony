@@ -16,24 +16,24 @@ class RDVFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $this->medecins=$options['medecins'];
+        $this->medecins = $options['medecins'];
 
         $builder
-            ->add('creneau')
-            ->add('medecin',ChoiceType::class,[
-                'choices'=> $this->medecins,
+            ->add('creneau', DateTimeType::class, [
+                'data'   => new \DateTime(),
+            ])
+            ->add('medecin', ChoiceType::class, [
+                'choices' => $this->medecins,
                 'choice_label' => 'nom'
             ])
-            ->add('Ajouter', SubmitType::class);
-        ;
+            ->add('Ajouter', SubmitType::class);;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => RDV::class,
-            'medecins'=>null,
+            'medecins' => null,
         ]);
-        $resolver->setRequired('medecins');
     }
 }
