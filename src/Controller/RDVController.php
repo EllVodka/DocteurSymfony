@@ -39,7 +39,10 @@ class RDVController extends AbstractController
     public function viewAll(RDVRepository $rdvRepository): Response
     {
         return $this->render('rdv/viewall.html.twig', [
-            'rdvRepository' => $rdvRepository->findBy(['user'=>$this->getUser()]),
+            'rdvRepository' => $rdvRepository->findBy(
+                ['user' => $this->getUser()],
+                ['creneau' => 'DESC']
+            ),
         ]);
     }
 
@@ -63,7 +66,7 @@ class RDVController extends AbstractController
     {
         $rdv = new RDV();
         $typeC = $typeConsult->find($idConsult);
-        $form = $this->createForm(RDVFormType::class, $rdv,['medecins' => $typeC->getMedecin()]);
+        $form = $this->createForm(RDVFormType::class, $rdv, ['medecins' => $typeC->getMedecin()]);
         $manager = $doctrine->getManager();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
