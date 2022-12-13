@@ -12,11 +12,18 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class RDVFormType extends AbstractType
 {
+    private $medecin;
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $this->medecins=$options['medecins'];
+
         $builder
             ->add('creneau')
-            ->add('medecin')
+            ->add('medecin',ChoiceType::class,[
+                'choices'=> $this->medecins,
+                'choice_label' => 'nom'
+            ])
             ->add('Ajouter', SubmitType::class);
         ;
     }
@@ -25,6 +32,8 @@ class RDVFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => RDV::class,
+            'medecins'=>null,
         ]);
+        $resolver->setRequired('medecins');
     }
 }

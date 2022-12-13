@@ -19,9 +19,9 @@ class MedecinController extends AbstractController
      */
     public function index(DocteurRepository $docteurRepository): Response
     {
-        $docteurs = $docteurRepository->findAll();
+        $medecins = $docteurRepository->findAll();
         return $this->render('medecin/index.html.twig', [
-            'docteurs' => $docteurs
+            'medecins' => $medecins
         ]);
     }
 
@@ -30,9 +30,9 @@ class MedecinController extends AbstractController
      */
     public function view(int $id,DocteurRepository $docteurRepository): Response
     {
-        $docteur = $docteurRepository->find($id);
+        $medecin = $docteurRepository->find($id);
         return $this->render('medecin/view.html.twig', [
-            'docteur'=>$docteur
+            'medecin'=>$medecin
             
         ]);
     }
@@ -43,18 +43,18 @@ class MedecinController extends AbstractController
      */
     public function add(ManagerRegistry $doctrine, Request $request): Response
     {
-        $docteur= new Docteur();
-        $form = $this->createForm(MedecinType::class,$docteur);
+        $medecin = new Docteur();
+        $form = $this->createForm(MedecinType::class,$medecin);
 
         $manager = $doctrine->getManager();  
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            $docteur->setNom("Dr. " . $docteur->getNom());
-            $docteur = $form->getData();
-            $manager->persist($docteur);
+            $medecin->setNom("Dr. " . $medecin->getNom());
+            $medecin = $form->getData();
+            $manager->persist($medecin);
             $manager->flush();
-            dump($docteur);
-            return $this->redirectToRoute('medecin_view',array("id"=> $docteur->getId()));
+            dump($medecin);
+            return $this->redirectToRoute('medecin_view',array("id"=> $medecin->getId()));
         }
 
         return $this->renderForm('medecin/add.html.twig',[

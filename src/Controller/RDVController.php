@@ -52,7 +52,7 @@ class RDVController extends AbstractController
     {
         $rdv = new RDV();
         $typeC = $typeConsult->find($idConsult);
-        $form = $this->createForm(RDVFormType::class, $rdv);
+        $form = $this->createForm(RDVFormType::class, $rdv,['medecins' => $typeC->getMedecin()]);
         $manager = $doctrine->getManager();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
