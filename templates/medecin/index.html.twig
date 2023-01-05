@@ -58,8 +58,8 @@
 					<td>
 					{% set nb = 0 %}
 						{% for nbrdv in nbRdvs %}
-							{% if nbrdv[0].id == medecin.id %}
-							{% set nb = nbrdv[0].id %}
+							{% if nbrdv[0].medecin.id == medecin.id %}
+							{% set nb = nbrdv.nbRdv %}
 							{% endif %}
 						{% endfor %}
 						{{ nb }}
