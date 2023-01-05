@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class RDVFormType extends AbstractType
 {
-    private $medecin;
+    private $medecins;
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -7,7 +7,6 @@
 	<style>
 		.example-wrapper {
 			margin: 1em auto;
-			max-width: 800px;
 			width: 95%;
 			font: 18px / 1.5 sans-serif;
 		}
@@ -18,29 +17,56 @@
 		li {
 			text-decoration: none;
 		}
+		.button{
+			text-decoration: none;
+			padding: 10px;
+			background-color: blue;
+			border-radius: 10px;
+			color: white;
+			border: none;
+		}
+		.button:hover{
+			color:red;
+		}
 	</style>
 
 	<div class="example-wrapper">
 		<h1>Voici la liste des medecins ✅</h1>
 
-		<ul>
-			{% for medecin in medecins %}
+		<table class="table">
+			<tr>
+				<td>Id</td>
+				<td>Nom</td>
+				<td>Description</td>
+				<td>Ville</td>
+				<td>Telephone</td>
+				<td>Voir Medecin</td>
+				<td>Nombre de rdv dans le mois</td>
+			</tr>
 
-				<li>
-					{{medecin.id}}
-					-
-					{{medecin.nom}}
-					-
-					{{medecin.description}}
-					-
-					{{medecin.ville}}
-					-
-					{{medecin.telephone}}
-					-
-					<a href="{{ path('medecin_view',{'id':medecin.id}) }}">voir la fiche</a>
-				</li>
+
+			{% for medecin in medecins %}
+				<tr>
+					<td>{{medecin.id}}</td>
+					<td>{{medecin.nom}}</td>
+					<td>{{medecin.description}}</td>
+					<td>{{medecin.ville}}</td>
+					<td>{{medecin.telephone}}</td>
+					<td>
+						<a class="button" href="{{ path('medecin_view',{'id':medecin.id}) }}">voir la fiche</a>
+					</td>
+					<td>
+					{% set nb = 0 %}
+						{% for nbrdv in nbRdvs %}
+							{% if nbrdv[0].id == medecin.id %}
+							{% set nb = nbrdv[0].id %}
+							{% endif %}
+						{% endfor %}
+						{{ nb }}
+					</td>
+				</tr>
 			{% endfor %}
-		</ul>
+		</table>
 
 
 	</div>

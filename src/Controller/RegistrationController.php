@@ -32,9 +32,16 @@ class RegistrationController extends AbstractController
                 )
             );
 
+             if ($form->get('role')->getData()){
+                $user->setRoles(["ROLE_MEDECIN"]);
+             }
+
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            
+            if ($form->get('role')->getData()){
+                return $this->redirectToRoute('medecin_add_user',array("userId" => $user->getId()));
+             }
 
             return $this->redirectToRoute('medecin');
         }

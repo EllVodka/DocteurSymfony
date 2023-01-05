@@ -10,6 +10,9 @@
 			max-width: 800px;
 			width: 95%;
 			font: 18px / 1.5 sans-serif;
+            display: flex;
+            flex-direction:column;
+            align-items: center;
 		}
 		.example-wrapper code {
 			background: #F5F5F5;
@@ -18,6 +21,17 @@
         .margin-bottom{
             margin-bottom:10vh;
         }
+		.rdv-button{
+			text-decoration: none;
+			padding: 10px;
+			background-color: blue;
+			border-radius: 10px;
+			color: white;
+			border: none;
+		}
+		.rdv-button:hover{
+			color:red;
+		}
 	</style>
 
 	<div class="example-wrapper">
@@ -30,6 +44,7 @@
 					<th>Praticien</th>
 					<th>Creneau</th>
 					<th>Durée</th>
+					<th>Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,6 +55,7 @@
 						<td>{{ rdv.medecin.nom }}</td>
 						<td>{{ rdv.creneau | date('d/m/Y h:m') }}</td>
 						<td>{{ rdv.typeConsultation.duree }}</td>
+						<td><a class="rdv-button" href="{{path('app_rdv_remove',{'idRdv':rdv.id})}}">Supprimer</a></td>
 					</tr>
                     {% endif %}
 				{% endfor %}

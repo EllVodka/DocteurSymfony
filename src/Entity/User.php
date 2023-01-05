@@ -59,6 +59,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $rDVs;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Docteur::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $docteur;
+
     public function __construct()
     {
         $this->rDVs = new ArrayCollection();
@@ -220,6 +225,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $rDV->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDocteur(): ?Docteur
+    {
+        return $this->docteur;
+    }
+
+    public function setDocteur(?Docteur $docteur): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($docteur === null && $this->docteur !== null) {
+            $this->docteur->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($docteur !== null && $docteur->getUser() !== $this) {
+            $docteur->setUser($this);
+        }
+
+        $this->docteur = $docteur;
 
         return $this;
     }

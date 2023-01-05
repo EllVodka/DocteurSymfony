@@ -83,4 +83,19 @@ class RDVController extends AbstractController
             'form' => $form,
         ]);
     }
+    /**
+     * @Route("/remove/{idRdv}", name="app_rdv_remove")
+     * @IsGranted("ROLE_USER")
+     */
+    public function remove(int $idRdv, ManagerRegistry $doctrine,RDVRepository $rdvR): Response
+    {
+        $manager = $doctrine->getManager();
+        $rdv = $rdvR->find($idRdv);
+        $manager->remove($rdv);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_rdv_view_all');
+    }
 }
+
+
