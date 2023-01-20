@@ -49,7 +49,7 @@
 			</thead>
 			<tbody>
 				{% for rdv in rdvRepository %}
-                {% if date(rdv.creneau) == date() %}
+                {% if  date(rdv.creneau) > date() and date(rdv.creneau) < date("+1days") %}
 					<tr>
 						<td>{{ rdv.typeConsultation.libelle }}</td>
 						<td>{{ rdv.user.nom }} {{ rdv.user.prenom }}</td>
@@ -78,7 +78,7 @@
 			</thead>
 			<tbody>
 				{% for rdv in rdvRepository %}
-                {% if date(rdv.creneau) > date() %}
+                {% if date(rdv.creneau) > date("+1days") %}
 					<tr>
 						<td>{{ rdv.typeConsultation.libelle }}</td>
 						<td>{{ rdv.user.nom }} {{ rdv.user.prenom }}</td>
