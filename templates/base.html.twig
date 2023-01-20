@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!{% endblock %}
+			{% block title %}Welcome!
+			{% endblock %}
 		</title>
 		<link
 		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -30,7 +31,7 @@
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="{{path('app_rdv_view_all')}}">Home</a>
 						</li>
-						
+
 						{% if app.user is null %}
 							<li class="nav-item">
 								<a class="nav-link" href="{{path('app_login')}}">Connexion</a>
@@ -39,13 +40,20 @@
 								<a class="nav-link" href="{{path('app_register')}}">Inscription</a>
 							</li>
 						{% else %}
-						<li class="nav-item">
+							<li class="nav-item">
 								<a class="nav-link" href="{{path('app_rdv')}}">Prendre Rendez-vous</a>
 							</li>
-						<li class="nav-item">
+							{% for r in app.user.roles %}
+								{% if r == "ROLE_MEDECIN" %}
+									<li class="nav-item">
+										<a class="nav-link" href="{{path('app_rdv_view_medecin')}}">Voir ces rdv</a>
+									</li>
+								{% endif %}
+							{% endfor %}
+							<li class="nav-item">
 								<a class="nav-link" href="{{path('medecin_add')}}">Ajouter un medecin</a>
 							</li>
-						<li class="nav-item">
+							<li class="nav-item">
 								<a class="nav-link" href="{{path('medecin')}}">Lister medecin</a>
 							</li>
 							<li class="nav-item">

@@ -96,6 +96,20 @@ class RDVController extends AbstractController
 
         return $this->redirectToRoute('app_rdv_view_all');
     }
+    /**
+     * @Route("/viewMedecin/", name="app_rdv_view_medecin")
+     * @IsGranted("ROLE_MEDECIN")
+     */
+    public function viewMedecin(RDVRepository $rdvR): Response
+    {
+     
+
+        return $this->renderForm('rdv/view-medecin.html.twig', [
+            'rdvRepository' => $rdvR->findBy(
+                ["medecin"=>$this->getUser()->getDocteur()->getId()],
+                ['creneau' => 'DESC']),
+        ]);
+    }
 }
 
 
