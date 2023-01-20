@@ -17,7 +17,7 @@
 		li {
 			text-decoration: none;
 		}
-		.button{
+		.button {
 			text-decoration: none;
 			padding: 10px;
 			background-color: blue;
@@ -25,8 +25,8 @@
 			color: white;
 			border: none;
 		}
-		.button:hover{
-			color:red;
+		.button:hover {
+			color: red;
 		}
 	</style>
 
@@ -56,10 +56,10 @@
 						<a class="button" href="{{ path('medecin_view',{'id':medecin.id}) }}">voir la fiche</a>
 					</td>
 					<td>
-					{% set nb = 0 %}
+						{% set nb = 0 %}
 						{% for nbrdv in nbRdvs %}
 							{% if nbrdv[0].medecin.id == medecin.id %}
-							{% set nb = nbrdv.nbRdv %}
+								{% set nb = nbrdv.nbRdv %}
 							{% endif %}
 						{% endfor %}
 						{{ nb }}

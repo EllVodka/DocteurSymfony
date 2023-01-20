@@ -70,7 +70,7 @@ class MedecinController extends AbstractController
      * @Route("/medecinAdd/{userId}", name="medecin_add_user")
      * @IsGranted("ROLE_MEDECIN")
      */
-    public function addByUser(int $userId, ManagerRegistry $doctrine, Request $request, UserRepository $userRepository, DocteurRepository $docteurRepository): Response
+    public function addByUser(int $userId, ManagerRegistry $doctrine, Request $request, UserRepository $userRepository): Response
     {
         $medecin = new Docteur();
         $manager = $doctrine->getManager();
