@@ -35,7 +35,36 @@
 	</style>
 
 	<div class="example-wrapper">
-		<h1>Rendez-vous a venir</h1>
+		<h1>Rendez-vous d'aujourd'hui</h1>
+		<table class="table margin-bottom">
+			<thead>
+				<tr>
+					<th>Consultation</th>
+					<th>Nom Patient</th>
+					<th>Telephone Patient</th>
+					<th>Creneau</th>
+					<th>Durée</th>
+					<th>Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for rdv in rdvRepository %}
+                {% if date(rdv.creneau) == date() %}
+					<tr>
+						<td>{{ rdv.typeConsultation.libelle }}</td>
+						<td>{{ rdv.user.nom }} {{ rdv.user.prenom }}</td>
+						<td>{{ rdv.user.telephone }} </td>
+						<td>{{ rdv.creneau | date('d/m/Y h:m') }}</td>
+						<td>{{ rdv.typeConsultation.duree }}</td>
+						<td><a class="rdv-button" href="{{path('app_rdv_remove',{'idRdv':rdv.id})}}">Supprimer</a></td>
+					</tr>
+                    {% endif %}
+				{% endfor %}
+			</tbody>
+
+		</table>
+
+        <h1>Rendez-vous a venir</h1>
 		<table class="table margin-bottom">
 			<thead>
 				<tr>
