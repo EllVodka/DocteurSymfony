@@ -72,6 +72,7 @@ class MedecinController extends AbstractController
      */
     public function addByUser(int $userId, ManagerRegistry $doctrine, Request $request, UserRepository $userRepository): Response
     {
+
         $medecin = new Docteur();
         $manager = $doctrine->getManager();
 

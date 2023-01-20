@@ -15,7 +15,7 @@
 			background: #F5F5F5;
 			padding: 2px 6px;
 		}
-		.button{
+		.button {
 			text-decoration: none;
 			padding: 10px;
 			background-color: blue;
@@ -23,8 +23,8 @@
 			color: white;
 			border: none;
 		}
-		.button:hover{
-			color:red;
+		.button:hover {
+			color: red;
 		}
 	</style>
 
@@ -41,7 +41,16 @@
 			on est bien y'a des pommes wola elles sont bonne çaaaaaaaaaaa mère</p>
 		<p>Tel :
 			{{medecin.telephone }}</p>
-		<p><a class="button" href="{{ path('medecin_edit',{'medecinId':medecin.id}) }}">Modifier</a></p>
+
+		{% for r in app.user.roles %}
+			{% if r == "ROLE_MEDECIN" %}
+		<p>
+			<a class="button" href="{{ path('medecin_edit',{'medecinId':medecin.id}) }}">Modifier</a>
+		</p>
+			{% endif %}
+		{% endfor %}
+
+
 
 
 	</div>
